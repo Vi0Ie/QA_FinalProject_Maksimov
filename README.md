@@ -1,3 +1,7 @@
+![Python](https://img.shields.io/badge/Python-3.12-blue)
+![Pytest](https://img.shields.io/badge/Pytest-Framework-green)
+![Allure](https://img.shields.io/badge/Allure-Reports-orange)
+
 # QA_FinalProject_Maksimov
 
 
@@ -136,7 +140,9 @@ pytest api/
 ```bash
 pytest --alluredir=allure-results
 ```
+## Allure Report Preview
 
+![Allure Report](screenshots/allure_report.png)
 ---
 
 ## Открыть отчёт локально

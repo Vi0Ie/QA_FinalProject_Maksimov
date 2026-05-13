@@ -1,4 +1,6 @@
 import os
+import json
+import allure
 
 import requests
 from dotenv import load_dotenv
@@ -23,6 +25,23 @@ class TandoorAPIClient:
 
         url = f"{self.base_url}{endpoint}"
 
+        allure.attach(
+            f"{method} {url}",
+            name="Request",
+            attachment_type=allure.attachment_type.TEXT
+        )
+
+        if data:
+            allure.attach(
+                json.dumps(
+                    data,
+                    indent=4,
+                    ensure_ascii=False
+                ),
+                name="Request Body",
+                attachment_type=allure.attachment_type.JSON
+            )
+
         try:
 
             response = requests.request(
@@ -32,47 +51,53 @@ class TandoorAPIClient:
                 json=data
             )
 
+            allure.attach(
+                str(response.status_code),
+                name="Status Code",
+                attachment_type=allure.attachment_type.TEXT
+            )
+
+            allure.attach(
+                response.text,
+                name="Response Body",
+                attachment_type=allure.attachment_type.JSON
+            )
+
             response.raise_for_status()
 
             return response
 
         except requests.exceptions.HTTPError as error:
-            print(f"HTTP error: {error}")
+
+            allure.attach(
+                str(error),
+                name="HTTP Error",
+                attachment_type=allure.attachment_type.TEXT
+            )
 
         except requests.exceptions.ConnectionError as error:
-            print(f"Connection error: {error}")
+
+            allure.attach(
+                str(error),
+                name="Connection Error",
+                attachment_type=allure.attachment_type.TEXT
+            )
 
         except requests.exceptions.Timeout as error:
-            print(f"Timeout error: {error}")
+
+            allure.attach(
+                str(error),
+                name="Timeout Error",
+                attachment_type=allure.attachment_type.TEXT
+            )
 
         except requests.exceptions.RequestException as error:
-            print(f"Request error: {error}")
 
-        return None
-
-    def import_recipe(self, recipe_url):
-
-        data = {
-            "url": recipe_url
-        }
-
-        response = self._make_request(
-            method="POST",
-            endpoint="/api/recipe-from-source/",
-            data=data
-        )
-
-        if response:
-            imported_recipe = response.json()
-
-            recipe_data = imported_recipe["recipe"]
-
-            created_recipe = self.create_recipe(recipe_data)
-
-            print("CREATED RECIPE:")
-            print(created_recipe)
-
-            return created_recipe
+            allure.attach(
+                str(error),
+                name="Request Error",
+                attachment_type=allure.attachment_type.TEXT
+            )
 
         return None
 

@@ -17,6 +17,12 @@ PASSWORD = os.getenv("TANDOOR_PASSWORD")
 
 @allure.feature("Authentication")
 @allure.story("User login")
+@allure.title("Successful user login")
+@allure.description("""
+Checks that user can successfully login
+into Tandoor Recipes application.
+""")
+@allure.severity(allure.severity_level.CRITICAL)
 def test_user_logged_in(driver):
 
     login_page = LoginPage(driver)

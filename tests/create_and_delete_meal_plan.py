@@ -19,6 +19,12 @@ PASSWORD = os.getenv("TANDOOR_PASSWORD")
 
 @allure.feature("Meal Plan")
 @allure.story("Create and delete meal plan")
+@allure.title("Create and delete meal plan")
+@allure.description("""
+Checks that user can create meal plan,
+verify it via API and delete it successfully.
+""")
+@allure.severity(allure.severity_level.CRITICAL)
 def test_create_meal_plan(
     driver,
     get_or_create_recipe,
