@@ -2,92 +2,283 @@
 
 
 
-## Getting started
+# QA Auto Tests for Tandoor Recipes
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+## Описание проекта
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+Проект содержит автоматизированные API- и UI-тесты для приложения Tandoor Recipes.
 
-## Add your files
+Основная цель проекта:
 
-* [Create](https://docs.gitlab.com/user/project/repository/web_editor/#create-a-file) or [upload](https://docs.gitlab.com/user/project/repository/web_editor/#upload-a-file) files
-* [Add files using the command line](https://docs.gitlab.com/topics/git/add_files/#add-files-to-a-git-repository) or push an existing Git repository with the following command:
+* проверка работы Meal Plan;
+* проверка API рецептов;
+* проверка авторизации пользователя;
+* генерация Allure-отчётов;
+* запуск тестов через GitHub Actions.
 
+---
+
+# Используемые технологии
+
+* Python 3.12
+* Pytest
+* Selenium
+* Requests
+* Allure Report
+* GitHub Actions
+* Page Object Model (POM)
+* dotenv
+* webdriver-manager
+
+---
+
+# Требования для запуска
+
+Перед запуском необходимо установить:
+
+* Python 3.12+
+* Google Chrome
+* Git
+* Allure CLI (для локального просмотра отчётов)
+
+---
+
+# Установка проекта
+
+## 1. Клонировать репозиторий
+
+```bash
+git clone https://github.com/Vi0Ie/qa_auto_tandoor.git
+cd qa_auto_tandoor
 ```
-cd existing_repo
-git remote add origin https://gitlab.com/antomaxsch-group/QA_FinalProject_Maksimov.git
-git branch -M main
-git push -uf origin main
+
+---
+
+## 2. Создать виртуальное окружение
+
+Windows:
+
+```bash
+python -m venv .venv
 ```
 
-## Integrate with your tools
+Активировать:
 
-* [Set up project integrations](https://gitlab.com/antomaxsch-group/QA_FinalProject_Maksimov/-/settings/integrations)
+```bash
+.venv\Scripts\activate
+```
 
-## Collaborate with your team
+---
 
-* [Invite team members and collaborators](https://docs.gitlab.com/user/project/members/)
-* [Create a new merge request](https://docs.gitlab.com/user/project/merge_requests/creating_merge_requests/)
-* [Automatically close issues from merge requests](https://docs.gitlab.com/user/project/issues/managing_issues/#closing-issues-automatically)
-* [Enable merge request approvals](https://docs.gitlab.com/user/project/merge_requests/approvals/)
-* [Set auto-merge](https://docs.gitlab.com/user/project/merge_requests/auto_merge/)
+## 3. Установить зависимости
 
-## Test and Deploy
+```bash
+pip install -r requirements.txt
+```
 
-Use the built-in continuous integration in GitLab.
+---
 
-* [Get started with GitLab CI/CD](https://docs.gitlab.com/ci/quick_start/)
-* [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/user/application_security/sast/)
-* [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/topics/autodevops/requirements/)
-* [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/user/clusters/agent/)
-* [Set up protected environments](https://docs.gitlab.com/ci/environments/protected_environments/)
+# Настройка переменных окружения
 
-***
+Создайте файл `.env` в корне проекта.
 
-# Editing this README
+Пример:
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
+```env
+BASE_URL=https://demo.tandoor.dev
+TANDOOR_USERNAME=your_username
+TANDOOR_PASSWORD=your_password
+TANDOOR_TOKEN=your_api_token
+```
 
-## Suggestions for a good README
+---
 
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+# Как получить API-токен
 
-## Name
-Choose a self-explaining name for your project.
+1. Войти в Tandoor Recipes
+2. Открыть:
+   Settings → API
+3. Создать новый токен
+4. Скопировать токен в `.env`
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+---
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+# Запуск тестов
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+## Все тесты
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+```bash
+pytest
+```
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+---
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+## Только UI-тесты
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+```bash
+pytest tests/
+```
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+---
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+## Только API-тесты
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+```bash
+pytest api/
+```
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+---
 
-## License
-For open source projects, say how it is licensed.
+# Генерация Allure-отчёта
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+## Запуск тестов с Allure
+
+```bash
+pytest --alluredir=allure-results
+```
+
+---
+
+## Открыть отчёт локально
+
+```bash
+allure serve allure-results
+```
+
+---
+
+# GitHub Actions
+
+Проект автоматически запускает тесты через GitHub Actions при каждом push в репозиторий.
+
+После выполнения:
+
+* запускаются API и UI тесты;
+* создаётся Allure Report;
+* отчёт публикуется через GitHub Pages.
+
+---
+
+# Allure Report
+
+Ссылка на отчёт:
+
+https://vi0le.github.io/qa_auto_tandoor/
+
+---
+
+# Структура проекта
+
+```text
+qa_auto_tandoor/
+│
+├── api/
+│   └── client.py
+│
+├── components/
+│   └── header_component.py
+│
+├── data/
+│   └── recipe_links.json
+│
+├── pages/
+│   ├── base_page.py
+│   ├── login_page.py
+│   ├── meal_plan_page.py
+│   └── shopping_list_page.py
+│
+├── tests/
+│   ├── create_and_delete_meal_plan.py
+│   ├── login.py
+│   ├── shopping_list_validation.py
+│   ├── test_api_client.py
+│   ├── test_recipes.py
+│   └── view_meal_plan.py
+│
+├── screenshots/
+├── .github/workflows/
+├── conftest.py
+├── requirements.txt
+├── pytest.ini
+└── README.md
+```
+
+---
+
+# Архитектура проекта
+
+Проект реализован с использованием паттерна Page Object Model (POM).
+
+Каждая страница приложения вынесена в отдельный класс:
+
+* LoginPage
+* MealPlanPage
+* BasePage
+
+Это позволяет:
+
+* переиспользовать код;
+* упростить поддержку;
+* уменьшить дублирование.
+
+---
+
+# Реализованные тестовые сценарии
+
+## UI
+
+* Авторизация пользователя
+* Создание Meal Plan
+* Удаление Meal Plan
+* Просмотр Meal Plan
+* Проверка Shopping List
+
+## API
+
+* Получение рецептов
+* Импорт рецепта
+* Удаление рецепта
+* Проверка API-клиента
+* Проверка заголовков API
+
+---
+
+# Используемые библиотеки
+
+* pytest
+* selenium
+* requests
+* allure-pytest
+* webdriver-manager
+* python-dotenv
+
+---
+
+# Особенности, найденные во время тестирования
+
+Во время тестирования была обнаружена проблема:
+
+* при первом нажатии на день календаря диалоговое окно Meal Plan не открывается;
+* компонент календаря перерисовывается;
+* возникает проблема stale DOM elements при UI-автоматизации.
+
+Issue был оформлен отдельно.
+
+---
+
+# Рекомендации по улучшению проекта
+
+* добавить параметризацию тестов;
+* добавить негативные сценарии;
+* добавить параллельный запуск тестов;
+* добавить screenshots при падениях;
+* добавить retries для flaky тестов;
+* покрыть остальные разделы приложения API-тестами;
+* добавить Docker-конфигурацию;
+* добавить Jenkins/GitLab CI.
+
+---
+
+# Автор
+
+Максимов Антон

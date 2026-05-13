@@ -1,6 +1,6 @@
-from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
+
 import random
 import time
 
@@ -18,12 +18,6 @@ class MealPlanPage(BasePage):
         By.XPATH,
         "(//input[contains(@class,'multiselect-search')])[1]"
     )
-
-    CREATE_BUTTON = (
-        By.XPATH,
-        "//span[contains(text(), 'Создать')]"
-    )
-
 
     DATE_CONTROLS = (
         By.XPATH,
@@ -111,20 +105,17 @@ class MealPlanPage(BasePage):
     )
 
     def open_meal_plan_page(self, base_url):
-        self.open(
-            f"{base_url}/mealplan"
-        )
+
+        self.open(f"{base_url}/mealplan")
 
         self.wait.until(
             EC.visibility_of_element_located(
-                (
-                    By.CSS_SELECTOR,
-                    "div.cv-day"
-                )
+                (By.CSS_SELECTOR, "div.cv-day")
             )
         )
 
     def click_calendar_day(self):
+
         days = self.driver.find_elements(
             By.CSS_SELECTOR,
             ".cv-day"
@@ -132,26 +123,21 @@ class MealPlanPage(BasePage):
 
         random_index = random.randint(0, len(days) - 1)
 
-        # первый клик
         days[random_index].click()
 
-        # ждем overlay/loading
         time.sleep(3)
 
-        # ждем пока overlay исчезнет
         self.wait.until(
             EC.invisibility_of_element_located(
                 (By.CSS_SELECTOR, ".v-overlay__scrim")
             )
         )
 
-        # заново ищем дни после перерисовки
         new_days = self.driver.find_elements(
             By.CSS_SELECTOR,
             ".cv-day"
         )
 
-        # второй клик по обновленному элементу
         new_days[random_index].click()
 
         time.sleep(2)
@@ -198,8 +184,8 @@ class MealPlanPage(BasePage):
                 recipe_element
             )
 
-
     def increase_date_range(self):
+
         buttons = self.wait.until(
             EC.presence_of_all_elements_located(
                 self.DATE_CONTROLS
@@ -212,6 +198,7 @@ class MealPlanPage(BasePage):
         )
 
     def decrease_date_range(self):
+
         buttons = self.wait.until(
             EC.presence_of_all_elements_located(
                 self.DATE_CONTROLS
@@ -224,6 +211,7 @@ class MealPlanPage(BasePage):
         )
 
     def previous_date_range(self):
+
         buttons = self.wait.until(
             EC.presence_of_all_elements_located(
                 self.DATE_CONTROLS
@@ -236,6 +224,7 @@ class MealPlanPage(BasePage):
         )
 
     def next_date_range(self):
+
         buttons = self.wait.until(
             EC.presence_of_all_elements_located(
                 self.DATE_CONTROLS
@@ -246,7 +235,9 @@ class MealPlanPage(BasePage):
             "arguments[0].click();",
             buttons[2]
         )
+
     def fill_time(self, time_value):
+
         time_input = self.wait.until(
             EC.element_to_be_clickable(
                 self.TIME_INPUT
@@ -263,6 +254,7 @@ class MealPlanPage(BasePage):
         time_input.send_keys(time_value)
 
     def select_meal_type(self, meal_type):
+
         field = self.wait.until(
             EC.element_to_be_clickable(
                 self.MEAL_TYPE_FIELD
@@ -285,6 +277,7 @@ class MealPlanPage(BasePage):
         option.click()
 
     def set_servings(self, value):
+
         field = self.wait.until(
             EC.element_to_be_clickable(
                 self.SERVINGS_FIELD
@@ -296,6 +289,7 @@ class MealPlanPage(BasePage):
         field.send_keys(str(value))
 
     def increase_servings(self):
+
         self.wait.until(
             EC.element_to_be_clickable(
                 self.SERVINGS_INCREMENT_BUTTON
@@ -303,6 +297,7 @@ class MealPlanPage(BasePage):
         ).click()
 
     def decrease_servings(self):
+
         self.wait.until(
             EC.element_to_be_clickable(
                 self.SERVINGS_DECREMENT_BUTTON
@@ -310,6 +305,7 @@ class MealPlanPage(BasePage):
         ).click()
 
     def set_add_to_shopping_list(self, enabled=True):
+
         checkbox = self.wait.until(
             EC.presence_of_element_located(
                 self.SHOPPING_LIST_CHECKBOX
@@ -322,6 +318,7 @@ class MealPlanPage(BasePage):
             checkbox.click()
 
     def enter_notes(self, text):
+
         notes = self.wait.until(
             EC.element_to_be_clickable(
                 self.NOTES_FIELD
@@ -402,7 +399,6 @@ class MealPlanPage(BasePage):
 
     def open_created_meal_plan(self, recipe_name):
 
-        # первый поиск и клик
         recipe_plan = self.wait.until(
             EC.presence_of_element_located(
                 (
@@ -425,7 +421,6 @@ class MealPlanPage(BasePage):
             )
         )
 
-        # повторно ищем элемент после перерисовки
         recipe_plan = self.wait.until(
             EC.element_to_be_clickable(
                 (

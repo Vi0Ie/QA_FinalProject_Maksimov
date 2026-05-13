@@ -13,3 +13,4 @@ class ShoppingListPage(BasePage):
     def open_shopping_list(self, base_url):
 
         self.open(f"{base_url}/shopping")
+

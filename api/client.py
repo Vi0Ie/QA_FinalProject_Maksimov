@@ -96,7 +96,10 @@ class TandoorAPIClient:
             endpoint="/api/recipe/"
         )
 
-        return response.json()
+        if response:
+            return response.json()
+
+        return None
 
     def delete_recipe(self, recipe_id):
 
@@ -178,9 +181,3 @@ class TandoorAPIClient:
 
         else:
             print("Connection failed")
-
-if __name__ == "__main__":
-
-    client = TandoorAPIClient()
-
-    client.test_connection()

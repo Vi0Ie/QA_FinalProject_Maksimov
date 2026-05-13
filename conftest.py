@@ -10,6 +10,9 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 
+import allure
+from allure_commons.types import AttachmentType
+
 
 @pytest.fixture
 def api_client():
@@ -79,6 +82,14 @@ def pytest_runtest_makereport(item, call):
 
             driver.save_screenshot(screenshot_path)
 
+            with open(screenshot_path, "rb") as file:
+
+                allure.attach(
+                    file.read(),
+                    name=item.name,
+                    attachment_type=AttachmentType.PNG
+                )
+
             print(f"Screenshot saved: {screenshot_path}")
 
 
@@ -87,9 +98,17 @@ def driver():
 
     chrome_options = Options()
 
-    chrome_options.add_argument("--headless")
-
     chrome_options.add_argument("--window-size=1920,1080")
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+
+    HEADLESS = os.getenv(
+        "HEADLESS",
+        "true"
+    ).lower() == "true"
+
+   # if HEADLESS:
+   #    chrome_options.add_argument("--headless")
 
     driver = webdriver.Chrome(
         service=Service(
@@ -97,6 +116,8 @@ def driver():
         ),
         options=chrome_options
     )
+
+    driver.implicitly_wait(5)
 
     yield driver
 

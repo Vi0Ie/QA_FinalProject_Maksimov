@@ -39,7 +39,7 @@ class HeaderComponent(BasePage):
 
         self.click(self.PROFILE_BUTTON)
 
-        time.sleep(5)
+        time.sleep(2)
 
     def is_user_logged_in(self):
 
