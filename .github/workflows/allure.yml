@@ -1,54 +1,54 @@
 name: Allure Report
 
 on:
-push:
-branches:
-- main
+  push:
+    branches:
+      - main
 
 permissions:
-contents: write
+  contents: write
 
 jobs:
-tests:
-runs-on: ubuntu-latest
+  tests:
+    runs-on: ubuntu-latest
 
-env:
-  BASE_URL: ${{ secrets.BASE_URL }}
-  TANDOOR_USERNAME: ${{ secrets.TANDOOR_USERNAME }}
-  TANDOOR_PASSWORD: ${{ secrets.TANDOOR_PASSWORD }}
-  TANDOOR_TOKEN: ${{ secrets.TANDOOR_TOKEN }}
+    env:
+      BASE_URL: ${{ secrets.BASE_URL }}
+      TANDOOR_USERNAME: ${{ secrets.TANDOOR_USERNAME }}
+      TANDOOR_PASSWORD: ${{ secrets.TANDOOR_PASSWORD }}
+      TANDOOR_TOKEN: ${{ secrets.TANDOOR_TOKEN }}
 
-steps:
-  - name: Checkout
-    uses: actions/checkout@v4
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-  - name: Setup Python
-    uses: actions/setup-python@v5
-    with:
-      python-version: "3.12"
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
 
-  - name: Install Chrome
-    uses: browser-actions/setup-chrome@latest
+      - name: Install Chrome
+        uses: browser-actions/setup-chrome@latest
 
-  - name: Install dependencies
-    run: |
-      pip install -r requirements.txt
-      pip install allure-pytest
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install allure-pytest
 
-  - name: Run tests
-    run: |
-      pytest --alluredir=allure-results
+      - name: Run tests
+        run: |
+          pytest --alluredir=allure-results
 
-  - name: Generate Allure Report
-    uses: simple-elf/allure-report-action@master
-    if: always()
-    with:
-      allure_results: allure-results
-      allure_report: allure-report
+      - name: Generate Allure Report
+        uses: simple-elf/allure-report-action@master
+        if: always()
+        with:
+          allure_results: allure-results
+          allure_report: allure-report
 
-  - name: Deploy to GitHub Pages
-    uses: peaceiris/actions-gh-pages@v4
-    if: always()
-    with:
-      github_token: ${{ secrets.GITHUB_TOKEN }}
-      publish_dir: allure-report
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        if: always()
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: allure-report
