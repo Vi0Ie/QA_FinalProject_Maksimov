@@ -1,0 +1,1 @@
+POST https://tandoor.vs1.srv.eduson.tv/api/recipe/
