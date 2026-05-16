@@ -101,6 +101,41 @@ class TandoorAPIClient:
 
         return None
 
+    def import_recipe(self, recipe_url):
+
+        data = {
+            "url": recipe_url
+        }
+
+        response = self._make_request(
+            method="POST",
+            endpoint="/api/recipe-from-source/",
+            data=data
+        )
+
+        if response:
+            imported_recipe = response.json()
+
+            recipe_data = imported_recipe["recipe"]
+
+            created_recipe = self.create_recipe(
+                recipe_data
+            )
+
+            allure.attach(
+                json.dumps(
+                    created_recipe,
+                    indent=4,
+                    ensure_ascii=False
+                ),
+                name="Created Recipe",
+                attachment_type=allure.attachment_type.JSON
+            )
+
+            return created_recipe
+
+        return None
+
     def create_recipe(self, recipe_data):
 
         response = self._make_request(
