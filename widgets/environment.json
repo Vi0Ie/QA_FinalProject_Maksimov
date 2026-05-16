@@ -1,1 +1,1 @@
-[]
+[{"values":["Chrome"],"name":"Browser"},{"values":["GitHub Actions"],"name":"Environment"},{"values":["3.12"],"name":"Python"},{"values":["Pytest"],"name":"Framework"},{"values":["https://demo.tandoor.dev"],"name":"BaseURL"}]
