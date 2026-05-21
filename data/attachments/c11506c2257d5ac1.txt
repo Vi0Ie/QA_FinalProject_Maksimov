@@ -1,2 +1,0 @@
-<input id="checkbox-v-0-33" aria-disabled="false" aria-label="Add to shopping list" type="checkbox" value="true" checked="">
-None
