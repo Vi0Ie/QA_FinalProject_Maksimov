@@ -1,17 +1,17 @@
 "DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"","960","test_get_recipes","tests","Thu May 21 12:48:41 UTC 2026","passed","Thu May 21 12:48:42 UTC 2026","","test_api_client","",""
-"","22177","test_view_meal_plan","tests","Thu May 21 12:50:34 UTC 2026","broken","Thu May 21 12:50:56 UTC 2026","","test_view_meal_plan","",""
+"","763","test_get_recipes","tests","Thu May 21 13:03:47 UTC 2026","passed","Thu May 21 13:03:48 UTC 2026","","test_recipies","",""
+"","36037","test_shopping_list","tests","Thu May 21 13:03:49 UTC 2026","broken","Thu May 21 13:04:25 UTC 2026","","test_shopping_list_validation","",""
 "
 Checks that user can create meal plan,
 verify it via API and delete it successfully.
-","23814","Create and delete meal plan","tests","Thu May 21 12:49:21 UTC 2026","broken","Thu May 21 12:49:45 UTC 2026","","test_create_and_delete_meal_plan","",""
-"","10289","test_delete_recipe","tests","Thu May 21 12:48:51 UTC 2026","passed","Thu May 21 12:49:01 UTC 2026","","test_api_client","",""
-"","822","test_api_connection","tests","Thu May 21 12:49:01 UTC 2026","passed","Thu May 21 12:49:02 UTC 2026","","test_api_client","",""
-"","837","test_get_recipes","tests","Thu May 21 12:50:08 UTC 2026","passed","Thu May 21 12:50:09 UTC 2026","","test_recipies","",""
-"","0","test_api_client_headers","tests","Thu May 21 12:49:02 UTC 2026","passed","Thu May 21 12:49:02 UTC 2026","","test_api_client","",""
-"","9195","test_import_recipe","tests","Thu May 21 12:48:42 UTC 2026","passed","Thu May 21 12:48:51 UTC 2026","","test_api_client","",""
+","35970","Create and delete meal plan","tests","Thu May 21 13:02:40 UTC 2026","broken","Thu May 21 13:03:16 UTC 2026","","test_create_and_delete_meal_plan","",""
+"","829","test_get_recipes","tests","Thu May 21 13:02:11 UTC 2026","passed","Thu May 21 13:02:11 UTC 2026","","test_api_client","",""
 "
 Checks that user can successfully login
 into Tandoor Recipes application.
-","22321","Successful user login","tests","Thu May 21 12:49:45 UTC 2026","broken","Thu May 21 12:50:08 UTC 2026","","test_login","",""
-"","22228","test_shopping_list","tests","Thu May 21 12:50:10 UTC 2026","broken","Thu May 21 12:50:32 UTC 2026","","test_shopping_list_validation","",""
+","29602","Successful user login","tests","Thu May 21 13:03:17 UTC 2026","broken","Thu May 21 13:03:47 UTC 2026","","test_login","",""
+"","9685","test_import_recipe","tests","Thu May 21 13:02:11 UTC 2026","passed","Thu May 21 13:02:21 UTC 2026","","test_api_client","",""
+"","808","test_api_connection","tests","Thu May 21 13:02:31 UTC 2026","passed","Thu May 21 13:02:32 UTC 2026","","test_api_client","",""
+"","1","test_api_client_headers","tests","Thu May 21 13:02:32 UTC 2026","passed","Thu May 21 13:02:32 UTC 2026","","test_api_client","",""
+"","35597","test_view_meal_plan","tests","Thu May 21 13:04:26 UTC 2026","broken","Thu May 21 13:05:02 UTC 2026","","test_view_meal_plan","",""
+"","9892","test_delete_recipe","tests","Thu May 21 13:02:21 UTC 2026","passed","Thu May 21 13:02:31 UTC 2026","","test_api_client","",""
