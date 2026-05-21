@@ -165,6 +165,14 @@ def driver():
     if os.getenv("CI"):
         chrome_options.add_argument("--headless")
 
+    chrome_options.add_argument("--lang=ru-RU")
+    chrome_options.add_experimental_option(
+        "prefs",
+        {
+            "intl.accept_languages": "ru-RU,ru,en-US,en"
+        }
+    )
+
     chrome_options.add_argument("--window-size=1920,1080")
 
     chrome_options.add_argument("--no-sandbox")
