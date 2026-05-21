@@ -1,7 +1,17 @@
 "DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"","0","test_api_client_headers","tests","Sat May 16 10:40:52 UTC 2026","passed","Sat May 16 10:40:52 UTC 2026","","test_api_client","",""
-"","8374","test_import_recipe","tests","Sat May 16 10:40:33 UTC 2026","passed","Sat May 16 10:40:42 UTC 2026","","test_api_client","",""
-"","9582","test_delete_recipe","tests","Sat May 16 10:40:42 UTC 2026","passed","Sat May 16 10:40:51 UTC 2026","","test_api_client","",""
-"","761","test_api_connection","tests","Sat May 16 10:40:51 UTC 2026","passed","Sat May 16 10:40:52 UTC 2026","","test_api_client","",""
-"","878","test_get_recipes","tests","Sat May 16 10:40:32 UTC 2026","passed","Sat May 16 10:40:33 UTC 2026","","test_api_client","",""
-"","643","test_get_recipes","tests","Sat May 16 10:40:52 UTC 2026","passed","Sat May 16 10:40:53 UTC 2026","","test_recipies","",""
+"","809","test_api_connection","tests","Thu May 21 11:53:53 UTC 2026","passed","Thu May 21 11:53:53 UTC 2026","","test_api_client","",""
+"","11917","test_view_meal_plan","tests","Thu May 21 11:54:41 UTC 2026","broken","Thu May 21 11:54:53 UTC 2026","","test_view_meal_plan","",""
+"","10874","test_import_recipe","tests","Thu May 21 11:53:31 UTC 2026","failed","Thu May 21 11:53:42 UTC 2026","","test_api_client","",""
+"","10395","test_delete_recipe","tests","Thu May 21 11:53:42 UTC 2026","passed","Thu May 21 11:53:53 UTC 2026","","test_api_client","",""
+"
+Checks that user can successfully login
+into Tandoor Recipes application.
+","11970","Successful user login","tests","Thu May 21 11:54:14 UTC 2026","broken","Thu May 21 11:54:26 UTC 2026","","test_login","",""
+"","11920","test_shopping_list","tests","Thu May 21 11:54:28 UTC 2026","broken","Thu May 21 11:54:40 UTC 2026","","test_shopping_list_validation","",""
+"","651","test_get_recipes","tests","Thu May 21 11:54:26 UTC 2026","passed","Thu May 21 11:54:27 UTC 2026","","test_recipies","",""
+"
+Checks that user can create meal plan,
+verify it via API and delete it successfully.
+","11922","Create and delete meal plan","tests","Thu May 21 11:54:01 UTC 2026","broken","Thu May 21 11:54:13 UTC 2026","","test_create_and_delete_meal_plan","",""
+"","967","test_get_recipes","tests","Thu May 21 11:53:30 UTC 2026","passed","Thu May 21 11:53:31 UTC 2026","","test_api_client","",""
+"","0","test_api_client_headers","tests","Thu May 21 11:53:53 UTC 2026","passed","Thu May 21 11:53:53 UTC 2026","","test_api_client","",""
