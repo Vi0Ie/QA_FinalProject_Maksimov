@@ -1,0 +1,2 @@
+<input id="checkbox-v-0-33" aria-disabled="false" aria-label="Добавить в лист покупок" type="checkbox" value="true" checked="">
+None
