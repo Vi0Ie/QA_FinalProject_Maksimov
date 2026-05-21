@@ -1,5 +1,7 @@
 import os
 
+import time
+
 import pytest
 
 import allure
@@ -42,6 +44,8 @@ def test_user_logged_in(driver):
             USERNAME,
             PASSWORD
         )
+
+    time.sleep(2)
 
     with allure.step("Проверить что пользователь залогинен"):
 
