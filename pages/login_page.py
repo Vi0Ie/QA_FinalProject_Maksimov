@@ -9,10 +9,7 @@ class LoginPage(BasePage):
 
     PASSWORD_INPUT = (By.ID, "id_password")
 
-    LOGIN_BUTTON = (
-        By.XPATH,
-        "//button[contains(text(), 'Войти')]"
-    )
+    LOGIN_BUTTON = (By.CSS_SELECTOR, "button[type='submit']")
 
     def login(self, username, password):
 
