@@ -1,12 +1,24 @@
 image: python:3.12
 
 stages:
+  - prepare
   - test
+  - report
   - deploy
 
-before_script:
-  - pip install --upgrade pip
-  - pip install -r requirements.txt
+cache:
+  paths:
+    - .pip-cache/
+
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.pip-cache"
+
+prepare:
+  stage: prepare
+
+  script:
+    - pip install --upgrade pip
+    - pip install -r requirements.txt
 
 test:
   stage: test
@@ -20,8 +32,8 @@ test:
       - allure-results
       - screenshots
 
-pages:
-  stage: deploy
+report:
+  stage: report
 
   script:
     - apt-get update
@@ -29,6 +41,17 @@ pages:
     - wget https://github.com/allure-framework/allure2/releases/download/2.29.0/allure-2.29.0.zip
     - unzip allure-2.29.0.zip
     - ./allure-2.29.0/bin/allure generate allure-results -o public
+
+  artifacts:
+    when: always
+    paths:
+      - public
+
+deploy:
+  stage: deploy
+
+  script:
+    - echo "Deploying Allure Report"
 
   artifacts:
     paths:

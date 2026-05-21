@@ -172,8 +172,6 @@ class MealPlanPage(BasePage):
             recipe_element
         )
 
-        time.sleep(1)
-
         try:
             recipe_element.click()
 
@@ -434,8 +432,6 @@ class MealPlanPage(BasePage):
             "arguments[0].scrollIntoView({block: 'center'});",
             recipe_plan
         )
-
-        time.sleep(1)
 
         self.driver.execute_script(
             "arguments[0].click();",

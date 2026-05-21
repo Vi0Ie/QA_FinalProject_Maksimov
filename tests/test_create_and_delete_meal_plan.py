@@ -1,6 +1,7 @@
 import os
 import random
 import time
+import pytest
 
 import allure
 
@@ -17,9 +18,16 @@ USERNAME = os.getenv("TANDOOR_USERNAME")
 PASSWORD = os.getenv("TANDOOR_PASSWORD")
 
 
-@allure.feature("Shopping List")
-@allure.story("Shopping list validation")
-def test_shopping_list(
+@pytest.mark.ui
+@allure.feature("Meal Plan")
+@allure.story("Create and delete meal plan")
+@allure.title("Create and delete meal plan")
+@allure.description("""
+Checks that user can create meal plan,
+verify it via API and delete it successfully.
+""")
+@allure.severity(allure.severity_level.CRITICAL)
+def test_create_meal_plan(
     driver,
     get_or_create_recipe,
     api_client
@@ -27,33 +35,29 @@ def test_shopping_list(
 
     meal_type = "Обед"
 
-    servings = 2
+    servings = 4
 
-    notes = f"Shopping list test {time.time()}"
+    notes = f"Автотест meal plan {time.time()}"
 
     login_page = LoginPage(driver)
 
     meal_plan_page = MealPlanPage(driver)
 
     with allure.step("Открыть страницу логина"):
-
         login_page.open(BASE_URL)
 
     with allure.step("Авторизоваться"):
-
         login_page.login(
             USERNAME,
             PASSWORD
         )
 
     with allure.step("Открыть страницу Meal Plan"):
-
         meal_plan_page.open_meal_plan_page(
             BASE_URL
         )
 
     with allure.step("Нажать на день календаря"):
-
         meal_plan_page.click_calendar_day()
 
     random_recipe = random.choice(
@@ -83,24 +87,16 @@ def test_shopping_list(
             meal_type
         )
 
-    time.sleep(1)
-
     with allure.step(f"Установить servings: {servings}"):
 
         meal_plan_page.set_servings(
             servings
         )
 
-    with allure.step("Включить Add to shopping list"):
+    with allure.step("Отключить shopping list"):
 
         meal_plan_page.set_add_to_shopping_list(
-            True
-        )
-
-    with allure.step("Проверить что shopping list включён"):
-
-        print(
-            meal_plan_page.is_add_to_shopping_list_enabled()
+            False
         )
 
     with allure.step("Добавить notes"):
@@ -110,6 +106,8 @@ def test_shopping_list(
         )
 
     meal_plan_created = False
+
+    meal_plan_id = None
 
     try:
 
@@ -123,17 +121,24 @@ def test_shopping_list(
 
         meal_plan_created = True
 
-        time.sleep(2)
+        with allure.step("Получить meal plans через API"):
 
-        with allure.step("Открыть вкладку Shopping List"):
+            meal_plans = api_client.get_meal_plans()
 
-            meal_plan_page.open_shopping_list_tab()
+        with allure.step("Найти созданный meal plan"):
 
-        time.sleep(2)
+            for plan in meal_plans["results"]:
 
-        with allure.step("Проверить что shopping list не пустой"):
+                if (
+                        plan["recipe_name"] == recipe_name
+                        and plan["note"] == notes
+                        and float(plan["servings"]) == float(servings)
+                ):
+                    meal_plan_id = plan["id"]
 
-            assert meal_plan_page.is_shopping_list_not_empty()
+                    break
+
+            assert meal_plan_id is not None
 
     finally:
 
@@ -148,3 +153,11 @@ def test_shopping_list(
                 assert meal_plan_page.is_meal_plan_deleted(
                     recipe_name
                 )
+
+            time.sleep(1)
+
+            deleted_plan = api_client.get_meal_plan(
+                meal_plan_id
+            )
+
+            assert deleted_plan is None

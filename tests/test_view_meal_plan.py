@@ -1,6 +1,7 @@
 import os
 import random
 import time
+import pytest
 
 import allure
 
@@ -19,6 +20,7 @@ USERNAME = os.getenv("TANDOOR_USERNAME")
 PASSWORD = os.getenv("TANDOOR_PASSWORD")
 
 
+@pytest.mark.ui
 @allure.feature("Meal Plan")
 @allure.story("View meal plan")
 def test_view_meal_plan(

@@ -1,5 +1,7 @@
 import os
 
+import pytest
+
 import allure
 
 from dotenv import load_dotenv
@@ -15,6 +17,7 @@ USERNAME = os.getenv("TANDOOR_USERNAME")
 PASSWORD = os.getenv("TANDOOR_PASSWORD")
 
 
+@pytest.mark.ui
 @allure.feature("Authentication")
 @allure.story("User login")
 @allure.title("Successful user login")

@@ -1,6 +1,9 @@
 import allure
 
+import pytest
 
+
+@pytest.mark.api
 @allure.feature("API")
 @allure.story("Get recipes")
 def test_get_recipes(api_client):
@@ -22,6 +25,7 @@ def test_get_recipes(api_client):
         assert "results" in response
 
 
+@pytest.mark.api
 @allure.feature("API")
 @allure.story("Import recipe")
 def test_import_recipe(api_client, recipe_data):
@@ -47,6 +51,7 @@ def test_import_recipe(api_client, recipe_data):
         assert "id" in response
 
 
+@pytest.mark.api
 @allure.feature("API")
 @allure.story("Delete recipe")
 def test_delete_recipe(api_client, recipe_data):
@@ -89,6 +94,7 @@ def test_delete_recipe(api_client, recipe_data):
         assert recipe_id not in recipe_ids
 
 
+@pytest.mark.api
 @allure.feature("API")
 @allure.story("API connection")
 def test_api_connection(api_client):
@@ -106,6 +112,7 @@ def test_api_connection(api_client):
         assert "results" in response
 
 
+@pytest.mark.api
 @allure.feature("API")
 @allure.story("API headers")
 def test_api_client_headers(api_client):

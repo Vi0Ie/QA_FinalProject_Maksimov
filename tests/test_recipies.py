@@ -1,8 +1,10 @@
 import allure
+import pytest
 
 from api.client import TandoorAPIClient
 
 
+@pytest.mark.api
 @allure.feature("API")
 @allure.story("Get recipes without fixture")
 def test_get_recipes():

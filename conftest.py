@@ -162,9 +162,8 @@ def driver():
 
     chrome_options = Options()
 
-    chrome_options.add_argument(
-        "--headless"
-    )
+    if os.getenv("CI"):
+        chrome_options.add_argument("--headless")
 
     chrome_options.add_argument(
         "--window-size=1920,1080"
